@@ -6,7 +6,7 @@ services:
     ports:
       - 9876:9876
     volumes:
-      - ./data/namesrv/logs:/home/rocketmq/logs
+      - /docker/rocketmq/data/namesrv/logs:/home/rocketmq/logs
     command: sh mqnamesrv
   broker:
     image: registry.silot.tech/common/apacherocketmq:4.5.0
@@ -19,9 +19,9 @@ services:
     environment:
       - NAMESRV_ADDR=namesrv:9876
     volumes:
-      - ./data/broker/logs:/home/rocketmq/logs
-      - ./data/broker/store:/home/rocketmq/store
-      - ./data/broker/conf/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
+      - /docker/rocketmq/data/broker/logs:/home/rocketmq/logs
+      - /docker/rocketmq/data/broker/store:/home/rocketmq/store
+      - /docker/rocketmq/data/broker/conf/broker.conf:/opt/rocketmq-4.5.0/conf/broker.conf
     command: sh mqbroker -c /opt/rocketmq-4.5.0/conf/broker.conf
   rocketmq-console:
     image: styletang/rocketmq-console-ng:latest
